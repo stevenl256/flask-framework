@@ -15,6 +15,7 @@ import pandas as pd
 
 import pandas_datareader.data as web
 
+import os
 
 app_stock = Flask(__name__)
 
@@ -87,4 +88,5 @@ def index():
         plot_div=div,js_resources=js_resources,css_resources=css_resources)
 
 if __name__ == '__main__':
-    app_stock.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app_stock.run(host='0.0.0.0', port=port)

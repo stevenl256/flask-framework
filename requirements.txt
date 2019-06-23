@@ -5,3 +5,4 @@ lxml
 requests-file
 requests-ftp
 wrapt
+alpha_vantage

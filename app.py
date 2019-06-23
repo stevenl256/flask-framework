@@ -15,6 +15,8 @@ import pandas as pd
 
 import pandas_datareader.data as web
 
+from alpha_vantage.timeseries import TimeSeries
+
 import os
 
 app_stock = Flask(__name__)
@@ -35,10 +37,10 @@ def create_figure(ticker, show_open, show_close):
 
     # Plot requested data
     if show_open == 'True':
-        p.line(x = pd.to_datetime(imported_df.Date), y = imported_df.Open, color = 'navy', line_width = 4, alpha = 0.6)
+        p.line(x = pd.to_datetime(imported_df.date), y = imported_df.open, color = 'navy', line_width = 4, alpha = 0.6)
 
     if show_close == 'True':
-        p.line(x = pd.to_datetime(imported_df.Date), y = imported_df.Close, color = 'green', line_width = 4, alpha = 0.6)
+        p.line(x = pd.to_datetime(imported_df.date), y = imported_df.close, color = 'green', line_width = 4, alpha = 0.6)
 
     return p
 
@@ -68,15 +70,13 @@ def index():
         start = dt.datetime(2019,1,1)
         end = dt.datetime(2019,1,31)
         
-        df = web.DataReader(app_stock.vars['ticker'], 'yahoo', start, end)
-    
-        df[['Open','Close']].to_csv('StockData.csv')
+        ts = TimeSeries(key='stock_key', output_format='pandas', indexing_type='date')
+        df, meta_data = ts.get_daily(symbol=app_stock.vars['ticker'])
+        df = df[-30:][['1. open','4. close']]
+        df.columns = ['open', 'close']
+        df.to_csv('StockData.csv')
         
-        
-        f=open('booltest.txt', 'w')
-        f.write(app_stock.vars['show_open'])
-        f.close()
-        
+       
         
         plot = create_figure(app_stock.vars['ticker'], app_stock.vars['show_open'], app_stock.vars['show_close'])
         js_resources = INLINE.render_js()
@@ -89,4 +89,4 @@ def index():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app_stock.run(host='127.0.0.0', port=port)
+    app_stock.run(host='0.0.0.0', port=port)

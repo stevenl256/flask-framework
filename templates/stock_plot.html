@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<title>Stock Plotter</title>
+<link rel=stylesheet type=text/css href='{{ url_for('static',filename='style.css')}}'>
+
+<head>
+
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.14.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.14.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.14.min.css" type="text/css">
+
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.14.min.js"></script>
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-api-0.12.14.min.js"></script>
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.14.min.js"></script>
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.14.min.js"></script>
+
+</head>
+
+<body>
+
+
+<div class=page>
+  <div class=metanav>
+
+<h4>
+
+Stock info from 2019/01/01 to 2019/01/31: 
+
+</h4>
+
+<form id='userinfoform_lulu' method='post' action='index' > <!-- action is the URL you want to move to next-->
+   <p>
+
+</form>
+	<div>
+    {{ js_resources|indent(4)|safe }}
+    {{ css_resources|indent(4)|safe }}
+    {{ plot_script|indent(4)|safe }}
+	{{ plot_div|indent(4)|safe }}
+	</div>
+</div>
+</div>
+
+</body>
+
+</html>

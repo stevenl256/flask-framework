@@ -13,8 +13,6 @@ from bokeh.io import show, output_notebook
 import datetime as dt
 import pandas as pd
 
-import pandas_datareader.data as web
-
 from alpha_vantage.timeseries import TimeSeries
 
 import os

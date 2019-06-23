@@ -65,8 +65,8 @@ def index():
         else: 
             app_stock.vars['show_close'] = 'False'
             
-        start = dt.datetime(2019,1,1)
-        end = dt.datetime(2019,1,31)
+        #start = dt.datetime(2019,1,1)
+        #end = dt.datetime(2019,1,31)
         
         ts = TimeSeries(key='stock_key', output_format='pandas', indexing_type='date')
         df, meta_data = ts.get_daily(symbol=app_stock.vars['ticker'])
